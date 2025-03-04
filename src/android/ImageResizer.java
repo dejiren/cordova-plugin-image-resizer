@@ -349,8 +349,8 @@ public class ImageResizer extends CordovaPlugin {
 
         // SD Card Mounted
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            cache = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                    "/Android/data/" + cordova.getActivity().getPackageName() + "/cache/");
+            // Android 11以上では、getExternalFilesDir()を使用する
+            cache = cordova.getActivity().getExternalFilesDir(null);
         } else {
             // Use internal storage
             cache = cordova.getActivity().getCacheDir();
